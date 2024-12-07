@@ -110,10 +110,6 @@
                         <p class="mb-0">Déjà un compte ? <a href="{{ route('login') }}">Se connecter</a></p>
                     </div>
                 </div>
-
-                <div class="card-footer text-center">
-                   <p>Développé par : <a class="text-decoration-none" href="https://github.com/Abderraouf-Naji" target="_blank">Naji Abderraouf</a></p>
-                </div>
             </div>
         </div>
     </div>

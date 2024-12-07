@@ -13,6 +13,10 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SettingsController;
 
 
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -42,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('routines/daily', [RoutineController::class, 'showDaily'])->name('routines.showDaily');
     Route::get('routines/weekly', [RoutineController::class, 'showWeekly'])->name('routines.showWeekly');
     Route::get('routines/monthly', [RoutineController::class, 'showMonthly'])->name('routines.showMonthly');
-    Route::resource('files', FileController::class);
+    
     Route::resource('notes', NoteController::class);
     Route::resource('reminders', ReminderController::class);
     Route::resource('checklist-items', ChecklistItemController::class);
@@ -53,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
         $routinesCount = $user->routines()->count();
         $notesCount = $user->notes()->count();
         $remindersCount = $user->reminders()->count();
-        $filesCount = $user->files()->count();
+        $projectsCount = $user->projects()->count();
         $recentTasks = $user->tasks()->latest()->take(5)->get();
         $todayRoutines = $user->routines()->whereDate('start_time', now())->get();
         $recentNotes = $user->notes()->latest()->take(5)->get();
@@ -65,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
             'routinesCount', 
             'notesCount', 
             'remindersCount',
-            'filesCount', 
+            'projectsCount', 
             'recentTasks', 
             'todayRoutines', 
             'recentNotes', 
@@ -75,5 +79,14 @@ Route::middleware(['auth'])->group(function () {
 
 // routes/web.php
 Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
+
+
+Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
+Route::get('/search', [SearchController::class, 'index'])->name('search.index');
+Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+Route::put('/settings', [SettingsController::class, 'update'])->name('settings.update');
+
 
 });

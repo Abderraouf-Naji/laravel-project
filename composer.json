@@ -9,7 +9,7 @@
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "Nikita Popov"
+            "name": "Naji Abderraouf"
         }
     ],
     "require": {
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpParser\\": "lib/PhpParser"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

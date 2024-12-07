@@ -3,19 +3,23 @@
 // Vérifie si le mode sombre est déjà activé dans localStorage
 if (localStorage.getItem('dark-mode') === 'enabled') {
     document.body.classList.add('dark-mode');
-    document.getElementById('themeToggle').textContent = 'Activer le mode clair';
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.innerHTML = '<i class="fas fa-sun"></i> Activer le mode clair';
 }
 
-document.getElementById('themeToggle').addEventListener('click', function() {
+// Gestionnaire d'événement pour le bouton de basculement du thème
+document.getElementById('themeToggle').addEventListener('click', function () {
+    const themeToggle = this;
+
     // Bascule entre le mode sombre et le mode clair
     document.body.classList.toggle('dark-mode');
 
-    // Change le texte du bouton
+    // Change l'icône et le texte en fonction du mode activé
     if (document.body.classList.contains('dark-mode')) {
-        this.textContent = 'Activer le mode clair';
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i> mode sombre';
         localStorage.setItem('dark-mode', 'enabled');
     } else {
-        this.textContent = 'Activer le mode sombre';
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i> mode claire';
         localStorage.removeItem('dark-mode');
     }
 });
